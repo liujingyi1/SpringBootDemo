@@ -9,3 +9,13 @@ person:
   age: 10 
 
 
+logging:
+  config: classpath:log/logback-spring.xml
+  path: F:/joeslog/SpringBootDemo
+
+spring:
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    cache: false
+    prefix: classpath:/templates/

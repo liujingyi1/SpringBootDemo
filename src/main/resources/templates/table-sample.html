@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href="css/theme.css" rel="stylesheet">
+    
+    <script src="jquery/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="myjs/table-sample.js"></script>
+  </head>
+  <body>
+  
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index">Home</a>
+        </div>
+      </div>
+    </nav>
+    
+    <div class="container">
+    	<div id="table_test_group"class="row">
+    		<div class="row">
+    		   <div class="col-md-12 column">
+    		   	   <button id="load_row" type="button" class="btn btn-default ">加载</button>
+		    	   <button id="add_row" type="button" class="btn btn-default ">添加</button>
+			       <button id="delete_row" type="button" class="btn btn-default">删除</button>
+			       <button id="delete_all_row" type="button" class="btn btn-default">删除所有</button>
+		       </div>
+		    </div>
+    		<div class="row">
+	    		<div class="col-md-12 column">
+	    		<div class="table-responsive">
+	    		<table id="table_test" class="table table-bordered table-striped">
+	    		    <caption>基本的表格布局</caption>
+					<thead>
+						<tr>
+							<th>
+								编号
+							</th>
+							<th>
+								姓名
+							</th>
+							<th>
+								年龄
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+	
+					</tbody>
+				</table>
+	    		</div>
+	    		</div>
+    		</div>
+    	</div>
+    </div>
+  </body>
+</html>
