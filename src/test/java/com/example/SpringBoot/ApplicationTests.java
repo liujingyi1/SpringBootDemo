@@ -12,8 +12,8 @@ public class ApplicationTests {
 //	@Autowired
 //	TestWebSocket testWebSocket;
 	
-	@Test
-	public void contextLoads() {
+//	@Test
+//	public void contextLoads() {
 //		try {
 //			testWebSocket.sendMessage("sdfaaa");
 //		} catch (Exception e) {
@@ -22,10 +22,10 @@ public class ApplicationTests {
 //		}
 //		TestWebSocket.
 		
-	}
+//	}
 	
-	@Test
-	public void sendMessage() {
-	}
+//	@Test
+//	public void sendMessage() {
+//	}
 
 }

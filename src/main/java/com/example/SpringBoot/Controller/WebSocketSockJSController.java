@@ -14,7 +14,8 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class WebSocketSockJSController {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketSockJSController.class);
+	private static final Logger LOGGER = 
+			LoggerFactory.getLogger(WebSocketSockJSController.class);
 	
 	@Autowired
 	public SimpMessagingTemplate template;
@@ -27,9 +28,8 @@ public class WebSocketSockJSController {
 		template.convertAndSend("/topic/getResponse", name);
 	}
 	
-	
 	/*
-	 * 会在路径最前面加上/user，所以回复这个消息路径应该是/user/zhangsan/message
+	 * 会在路径最前面加上/user，所以这个消息发送的路径应该是/user/zhangsan/message
 	 */
 	@MessageMapping("/queue")
 	public void queuw(String name) {
@@ -43,18 +43,23 @@ public class WebSocketSockJSController {
 	 */
 	@MessageMapping("/welcome/{id}")
 	@SendTo("/topic/getResponse")
-	public String say(String message, @Header("name") String name, @DestinationVariable("id") String id) throws Exception {
+	public String say(String message, @Header("name") String name,
+			@DestinationVariable("id") String id) throws Exception {
 
 		LOGGER.info("receive message id={},name={},message={}",id,name,message);
-		
 		Thread.sleep(1000);
-		
 		return "jingyi";
 	}
 	
     @SubscribeMapping("/topic/getResponse")
     public String sub() {
     	LOGGER.info("XXX用户订阅了我。。。");
-        return "订阅了我";
+        return "订阅成功";
+    }
+    
+    @MessageMapping("/topic/heartbeat")
+    public String heart(String date) {
+    	LOGGER.info("heart beating date:{}", date);
+    	return "11";
     }
 }

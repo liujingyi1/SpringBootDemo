@@ -8,7 +8,7 @@ $(document).ready(function(){
 	function setConnected(connected) {
 		document.getElementById("connect").disable = connected;
 		document.getElementById("disconnect").disable = !connected;
-		$("#message").html;
+		$("#message").html("");
 	}
 	
 	function connect() {
@@ -17,15 +17,45 @@ $(document).ready(function(){
 		stompClient.connect({}, function(frame) {
 			setConnected(true);
 			console.log('Connected: '+frame);
-			stompClient.subscribe('/topic/getResponse', function(response){
-				console.log('response: '+response.body);
-				setMessageInnerHTML(response.body);
-			});
+			listenInfo();
+			retryCount = 0;
+			
 //			stompClient.subscribe('/user/zhangsan/message', function(response){
 //				console.log('response: '+response.body);
 //				setMessageInnerHTML(response.body);
 //			});
+			
+		}, function(frame) {
+			console.log('error: '+frame);
+			reconnectWs();
 		});
+	}
+
+	var lastSendDate = new Date();
+	function listenInfo() {
+		var listenUrl = "/topic/getResponse";
+		stompClient.subscribe(listenUrl, function(response){
+			console.log('response: '+response.body);
+			setMessageInnerHTML(response.body);
+
+			var currentDate = new Date();
+            if((currentDate.getTime()-lastSendDate.getTime())>=50000){
+				stompClient.send("/topic/heartbeat", {}, currentDate);
+                lastSendDate = new Date();
+            }
+		});
+	}
+	
+	var retryCount = 0;
+	var MAX_RETRY_COUNT = 10;
+	function reconnectWs(){
+		if (retryCount < MAX_RETRY_COUNT) {
+			retryCount += 1;
+			setTimeout(function(){
+				  console.log('>>> try to reconnect');
+				  connect();
+			}, 3000);
+		}
 	}
 	
     function disconnect() {
